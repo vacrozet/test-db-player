@@ -1,0 +1,4 @@
+USER=valentin
+PASS=valentin
+HOST=0.0.0.0
+PORT=3005

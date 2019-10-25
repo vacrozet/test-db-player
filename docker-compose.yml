@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  api:
+    build: ./api/
+    container_name: 'api'
+    env_file: ./api/env
+    ports:
+      - "3005:3005"
+    depends_on:
+      - mongo
+    networks:
+      - player
+  mongo:
+    image: mongo:4.2
+    container_name: 'mongo'
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=game
+      - MONGO_INITDB_ROOT_USERNAME=valentin
+      - MONGO_INITDB_ROOT_PASSWORD=valentin
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    ports:
+      - "27017:27017"
+    networks:
+      - player
+
+networks:
+  player:
